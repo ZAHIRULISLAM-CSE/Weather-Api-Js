@@ -6,15 +6,34 @@ const fetchData= async(value)=>{
     data= await respone.json();
     displayData(data);
 }
+fetchData("dhaka");
+
 
 const displayData=data =>{
     console.log(data);
-    const name=data.name;
-    let temp=data.main.temp;
-    temp=temp-273;
-    const weather=data.weather[0].main;
-    console.log(name,temp,weather);
+    if(data.cod == 404){
+        document.getElementById("status").innerHTML="No Data Found"
+        document.getElementById("name").innerText='';
+        document.getElementById("temp").innerHTML='';
+        document.getElementById('weather').innerHTML='';
+        document.getElementById("input").value;
+    }
+    else{
+        document.getElementById("status").innerHTML="";
+        const name=data.name;
+        let temp=data.main.temp;
+        temp=temp-273;
+        temp=temp.toFixed(2);
+        const weather=data.weather[0].main;
+        // console.log(name,temp,weather);
+        document.getElementById("name").innerText=name;
+        document.getElementById("temp").innerHTML=temp;
+        document.getElementById('weather').innerHTML=weather;
+        document.getElementById("input").value;
+    }
+    
 }
+
 
 document.getElementById("search").addEventListener("click",function(){
     const value=document.getElementById("input").value;
